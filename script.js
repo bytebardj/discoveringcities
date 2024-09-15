@@ -12,11 +12,13 @@ const gameTitle = document.getElementById('gameTitle');
 const startScreen = document.getElementById('startScreen');
 
 // Language strings
+// Update the strings object in script.js
+// Update the strings object in script.js
 const strings = {
     en: {
         gameTitle: 'Discovering Cities',
         selectLanguage: 'Select Language',
-        startPrompt: 'Press any key to start the game',
+        startPrompt: 'Press any key or tap the screen to start the game',
         discoverCity: 'You discovered: ',
         moreToGo: ' more to go in Level ',
         hitWall: 'Game Over! You hit the wall.',
@@ -29,9 +31,9 @@ const strings = {
         citiesDiscovered: 'Cities Discovered',
     },
     zh: {
-        gameTitle: '发现每座城',
+        gameTitle: '发现城市',
         selectLanguage: '选择语言',
-        startPrompt: '按任意键开始游戏',
+        startPrompt: '按任意键或触摸屏幕开始游戏',
         discoverCity: '你发现了：',
         moreToGo: '个城市，进入第',
         hitWall: '游戏结束！你撞到了墙上。',
@@ -68,16 +70,26 @@ let gameInterval;
 // Function to select language
 
 // Update the selectLanguage function to show the start prompt
+// script.js
+
+// Existing variables and functions...
+
+// Function to select language
 function selectLanguage(selectedLanguage) {
     language = selectedLanguage;
     // Update game title and start screen text
     gameTitle.innerText = strings[language].gameTitle;
     startScreen.innerHTML = `<p>${strings[language].startPrompt}</p>`;
     startScreen.style.display = 'block'; // Ensure the start screen is visible
+
+    // Add event listeners for starting the game
     document.addEventListener('keydown', startGame);
+    // Add touch and click event listeners for mobile devices
+    startScreen.addEventListener('touchstart', startGame, { passive: true });
+    startScreen.addEventListener('click', startGame);
 }
 
-// Update the startGame function to hide the start screen and center elements
+// Update the startGame function to remove touch and click event listeners
 function startGame() {
     if (!gameStarted) {
         gameStarted = true;
@@ -85,12 +97,18 @@ function startGame() {
         canvas.style.display = 'block';
         controls.style.display = 'flex'; // Show the controls
         cityDisplay.innerText = `${strings[language].level} 1: ${strings[language].citiesToDiscover}${citiesToDiscover - citiesDiscovered}${strings[language].moreCities}`;
+        
+        // Remove event listeners to prevent multiple triggers
         document.removeEventListener('keydown', startGame);
+        startScreen.removeEventListener('touchstart', startGame);
+        startScreen.removeEventListener('click', startGame);
+
         document.addEventListener('keydown', keyPush);
         resetGame();
         gameInterval = setInterval(game, 100);
     }
 }
+
 
 
 // City data
@@ -308,7 +326,7 @@ function draw() {
     }
 }
 
-// Update the gameOver function to hide controls
+// In the gameOver function, ensure we re-add the touch and click event listeners
 function gameOver(message) {
     // Construct the game over message with level and cities discovered
     let gameOverMessage = `${message}\n${strings[language].level} ${currentLevel}\n${strings[language].citiesDiscovered}: ${citiesDiscovered}/${citiesToDiscover}`;
@@ -322,9 +340,17 @@ function gameOver(message) {
     controls.style.display = 'none'; // Hide the controls
     startScreen.style.display = 'block';
     startScreen.innerHTML = `<p>${strings[language].startPrompt}</p>`;
+    
+    // Re-add event listeners for starting the game
     document.addEventListener('keydown', startGame);
+    startScreen.addEventListener('touchstart', startGame, { passive: true });
+    startScreen.addEventListener('click', startGame);
+    
     document.removeEventListener('keydown', keyPush);
 }
+
+// Existing code for controls, touch events, and other game logic...
+
 
 // Control the snake with keyboard arrows
 function keyPush(evt) {
