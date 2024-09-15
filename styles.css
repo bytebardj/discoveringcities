@@ -90,3 +90,23 @@ body {
         line-height: 20vw;
     }
 } 
+
+.languageButton, #startGameButton {
+    font-size: 1.5em;
+    padding: 15px 30px;
+    margin: 10px;
+    cursor: pointer;
+    border: 1px solid #999;
+    border-radius: 10px;
+    background-color: #ccc;
+}
+
+.languageButton:active, #startGameButton:active {
+    background-color: #aaa;
+}
+
+/* Style the start screen text */
+#startScreen p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
