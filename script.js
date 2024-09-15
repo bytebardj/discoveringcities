@@ -410,6 +410,10 @@ function startGame() {
     }
 }
 
+// script.js
+
+// Existing variables and functions...
+
 // Get the control buttons
 const upButton = document.getElementById('upButton');
 const downButton = document.getElementById('downButton');
@@ -430,7 +434,7 @@ leftButton.addEventListener('click', () => changeDirection('left'));
 rightButton.addEventListener('touchstart', () => changeDirection('right'));
 rightButton.addEventListener('click', () => changeDirection('right'));
 
-// Function to change direction based on button press
+// Function to change direction
 function changeDirection(direction) {
     switch (direction) {
         case 'left':
@@ -459,6 +463,9 @@ function changeDirection(direction) {
             break;
     }
 }
+
+// No changes needed in the rest of the code.
+
 
 // Update the gameOver function to hide controls
 function gameOver(message) {
