@@ -1,0 +1,92 @@
+/* styles.css */
+
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+/* Center the game container */
+#gameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+    min-height: 100vh; /* Makes the container fill the viewport height */
+}
+
+/* Style the game title */
+#gameTitle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Style the start screen */
+#startScreen {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Style the canvas */
+#gameCanvas {
+    border: 1px solid #000;
+    background-color: #f0f0f0;
+}
+
+/* Style the city display */
+#cityDisplay {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Style the control buttons */
+#controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 200px;
+    margin: 20px auto;
+}
+
+.control-button {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    font-size: 2em;
+    text-align: center;
+    line-height: 60px;
+    background-color: #ccc;
+    border: 1px solid #999;
+    border-radius: 10px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.control-button:active {
+    background-color: #aaa;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+    #gameCanvas {
+        width: 90vw;
+        height: auto;
+    }
+    #controls {
+        width: 90vw;
+    }
+    .control-button {
+        width: 20vw;
+        height: 20vw;
+        font-size: 4em;
+        line-height: 20vw;
+    }
+} 

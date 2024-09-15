@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Discovering Cities / 发现城市</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <h1 id="gameTitle">Discovering Cities / 发现城市</h1>
+        <div id="startScreen">
+            <p>Select Language / 选择语言:</p>
+            <button onclick="selectLanguage('en')">English</button>
+            <button onclick="selectLanguage('zh')">中文</button>
+            <p id="startPrompt" style="display: none;">Press any key to start the game</p>
+        </div>
+        <canvas id="gameCanvas" style="display: none;"></canvas>
+        <div id="cityDisplay"></div>
+        <!-- Directional Buttons -->
+        <div id="controls" style="display: none;">
+            <div id="upButton" class="control-button">▲</div>
+            <div id="leftButton" class="control-button">◄</div>
+            <div id="downButton" class="control-button">▼</div>
+            <div id="rightButton" class="control-button">►</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
