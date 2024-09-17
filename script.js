@@ -486,3 +486,28 @@ function gameOver(message) {
 }
 
 // No need to update the HTML or CSS for swipe gestures
+
+// script.js
+
+// Existing variables and functions...
+
+// Prevent double-tap zoom on the entire document
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+    let now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, { passive: false });
+
+// Prevent pinch-to-zoom on the canvas and controls
+const preventDefault = function (event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+};
+
+canvas.addEventListener('touchstart', preventDefault, { passive: false });
+controls.addEventListener('touchstart', preventDefault, { passive: false });
+
