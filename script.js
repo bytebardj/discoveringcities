@@ -165,36 +165,7 @@ function startGame() {
     }
 }
 
-// Example radius of the green dot
-let baseDotRadius = 10;
 
-// Function to draw the green dot with the city name inside
-function drawGreenDot(x, y, cityName) {
-    ctx.font = "12px Arial";  // Set a base font size
-    let textWidth = ctx.measureText(cityName).width;
-
-    // Adjust the dot radius based on the text width
-    let dotRadius = baseDotRadius;
-    if (textWidth > dotRadius * 2) {
-        dotRadius = textWidth / 2 + 5; // Add some padding to ensure name fits
-    }
-
-    // Draw the green dot (circle)
-    ctx.beginPath();
-    ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
-    ctx.fillStyle = "green";
-    ctx.fill();
-    ctx.closePath();
-
-    // Draw the city name in the center of the dot
-    ctx.fillStyle = "white";  // Text color
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(cityName, x, y);  // Center text inside the circle
-}
-
-// Example usage within your game logic
-drawGreenDot(dotX, dotY, cityName);
 
 
 // City data
