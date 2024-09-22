@@ -371,6 +371,18 @@ function draw() {
         gridSize - 2
     );
 
+    // Add city name to the green dot
+    ctx.fillStyle = 'white';
+    ctx.font = '10px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    let cityInitial = currentCity ? currentCity.charAt(0) : '';
+    ctx.fillText(
+        cityInitial,
+        (cityPosX * gridSize) + (gridSize / 2),
+        (cityPosY * gridSize) + (gridSize / 2)
+    );
+
     // Draw the red dots (obstacles)
     ctx.fillStyle = 'red';
     for (let i = 0; i < redDots.length; i++) {
