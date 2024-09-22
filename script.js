@@ -207,6 +207,7 @@ function resetGame() {
     citiesDiscovered = 0;
     citiesToDiscover = currentLevel * 10;
     citiesList = language === 'en' ? cityNamesEn.slice() : cityNamesZh.slice();
+    currentCity = citiesList[Math.floor(Math.random() * citiesList.length)]; // Set initial city
     initializeLevel();
 }
 
@@ -243,6 +244,11 @@ function initializeLevel() {
     // Reset positions of dots
     cityPosX = Math.floor(Math.random() * tileCountX);
     cityPosY = Math.floor(Math.random() * tileCountY);
+
+    // Ensure currentCity is set
+    if (!currentCity) {
+        currentCity = citiesList[Math.floor(Math.random() * citiesList.length)];
+    }
 
     // Initialize red dots
     redDots = [];
@@ -398,6 +404,12 @@ function draw() {
             gridSize - 2
         );
     }
+
+    // Debug information
+    ctx.fillStyle = 'black';
+    ctx.font = '14px Arial';
+    ctx.fillText(`City: ${currentCity}`, 10, 20);
+    ctx.fillText(`Position: (${cityPosX}, ${cityPosY})`, 10, 40);
 }
 
 // In the gameOver function, ensure we re-add the touch and click event listeners
