@@ -85,6 +85,7 @@ const strings = {
         moreCities: ' more cities!',
         level: 'Level',
         citiesDiscovered: 'Cities Discovered',
+        cityToBeDiscovered: "City to be discovered: ",
     },
     zh: {
         gameTitle: '发现城市',
@@ -101,6 +102,7 @@ const strings = {
         moreCities: '个城市！',
         level: '级别',
         citiesDiscovered: '已发现城市',
+        cityToBeDiscovered: "待发现的城市：",
     }
 };
 
@@ -300,8 +302,7 @@ function update() {
     }
 
     // Check if snake eats the green dot (city)
-    if (snakePosX >= cityPosX - 0.5 && snakePosX < cityPosX + 1.5 &&
-        snakePosY >= cityPosY - 0.5 && snakePosY < cityPosY + 1.5) {
+    if (snakePosX === cityPosX && snakePosY === cityPosY) {
         tailLength++;
         citiesDiscovered++;
         // Pick a random city
@@ -369,29 +370,13 @@ function draw() {
         );
     }
 
-    // Draw the enlarged green dot (city)
-    const citySize = gridSize * 2; // Double the size
+    // Draw the green dot (city)
     ctx.fillStyle = 'green';
     ctx.fillRect(
-        cityPosX * gridSize - gridSize / 2,
-        cityPosY * gridSize - gridSize / 2,
-        citySize - 2,
-        citySize - 2
-    );
-
-    // Add city name to the green dot
-    ctx.fillStyle = 'white';
-    ctx.font = '12px Arial'; // Increased font size
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    let cityName = currentCity || '';
-    if (cityName.length > 8) {
-        cityName = cityName.substring(0, 8) + '...'; // Truncate long names
-    }
-    ctx.fillText(
-        cityName,
-        (cityPosX * gridSize),
-        (cityPosY * gridSize)
+        cityPosX * gridSize,
+        cityPosY * gridSize,
+        gridSize - 2,
+        gridSize - 2
     );
 
     // Draw the red dots (obstacles)
@@ -405,11 +390,18 @@ function draw() {
         );
     }
 
-    // Debug information
+    // Display the city to be discovered
     ctx.fillStyle = 'black';
-    ctx.font = '14px Arial';
-    ctx.fillText(`City: ${currentCity}`, 10, 20);
-    ctx.fillText(`Position: (${cityPosX}, ${cityPosY})`, 10, 40);
+    ctx.font = 'bold 20px Arial';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    let cityText = strings[language].cityToBeDiscovered + currentCity;
+    ctx.fillText(cityText, 10, 10);
+
+    // Display level and cities left to discover
+    ctx.font = '16px Arial';
+    let levelText = `${strings[language].level} ${currentLevel}: ${strings[language].citiesToDiscover}${citiesToDiscover - citiesDiscovered}${strings[language].moreCities}`;
+    ctx.fillText(levelText, 10, 40);
 }
 
 // In the gameOver function, ensure we re-add the touch and click event listeners
