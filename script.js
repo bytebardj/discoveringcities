@@ -294,7 +294,8 @@ function update() {
     }
 
     // Check if snake eats the green dot (city)
-    if (snakePosX === cityPosX && snakePosY === cityPosY) {
+    if (snakePosX >= cityPosX - 0.5 && snakePosX < cityPosX + 1.5 &&
+        snakePosY >= cityPosY - 0.5 && snakePosY < cityPosY + 1.5) {
         tailLength++;
         citiesDiscovered++;
         // Pick a random city
@@ -362,25 +363,29 @@ function draw() {
         );
     }
 
-    // Draw the green dot (city)
+    // Draw the enlarged green dot (city)
+    const citySize = gridSize * 2; // Double the size
     ctx.fillStyle = 'green';
     ctx.fillRect(
-        cityPosX * gridSize,
-        cityPosY * gridSize,
-        gridSize - 2,
-        gridSize - 2
+        cityPosX * gridSize - gridSize / 2,
+        cityPosY * gridSize - gridSize / 2,
+        citySize - 2,
+        citySize - 2
     );
 
     // Add city name to the green dot
     ctx.fillStyle = 'white';
-    ctx.font = '10px Arial';
+    ctx.font = '12px Arial'; // Increased font size
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    let cityInitial = currentCity ? currentCity.charAt(0) : '';
+    let cityName = currentCity || '';
+    if (cityName.length > 8) {
+        cityName = cityName.substring(0, 8) + '...'; // Truncate long names
+    }
     ctx.fillText(
-        cityInitial,
-        (cityPosX * gridSize) + (gridSize / 2),
-        (cityPosY * gridSize) + (gridSize / 2)
+        cityName,
+        (cityPosX * gridSize),
+        (cityPosY * gridSize)
     );
 
     // Draw the red dots (obstacles)
@@ -566,4 +571,3 @@ const preventDefault = function (event) {
 
 canvas.addEventListener('touchstart', preventDefault, { passive: false });
 controls.addEventListener('touchstart', preventDefault, { passive: false });
-
