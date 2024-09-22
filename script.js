@@ -1,5 +1,43 @@
 // script.js
 
+// Define the base speed for the game (in milliseconds)
+let baseSpeed = 200;  // Start with a delay of 200ms at level 1
+let currentSpeed = baseSpeed;
+let level = 1; // Start with level 1
+
+// Function to adjust speed based on the current level
+function updateSpeed() {
+    // Decrease the delay (increase speed) by 10ms for each new level
+    currentSpeed = baseSpeed - (level - 1) * 10; 
+    
+    // Ensure the speed doesn't get too fast (set a minimum speed limit)
+    if (currentSpeed < 50) {
+        currentSpeed = 50;  // Minimum speed limit
+    }
+}
+
+// Call this function whenever the player advances to the next level
+function nextLevel() {
+    level++;  // Move to the next level
+    updateSpeed();  // Adjust the speed based on the new level
+    
+    // Any other logic related to advancing to the next level
+}
+
+// Main game loop with speed control
+function gameLoop() {
+    if (!gameOver) {
+        moveSnake();
+        drawGame();
+
+        setTimeout(gameLoop, currentSpeed);  // Use current speed for the game loop delay
+    }
+}
+
+// Start the game with the initial speed
+setTimeout(gameLoop, currentSpeed);
+
+
 // Game variables
 let language = 'en';
 let gameStarted = false;
