@@ -165,17 +165,19 @@ let gameInterval;
 // Function to select language
 function selectLanguage(selectedLanguage) {
     language = selectedLanguage;
-    // Update game title and start screen text
+    // Update the game title and start screen text
     gameTitle.innerText = strings[language].gameTitle;
     startScreen.innerHTML = `<p>${strings[language].startPrompt}</p>`;
     startScreen.style.display = 'block'; // Ensure the start screen is visible
 
     // Add event listeners for starting the game
-    document.addEventListener('keydown', startGame);
-    // Add touch and click event listeners for mobile devices
-    startScreen.addEventListener('touchstart', startGame, { passive: true });
-    startScreen.addEventListener('click', startGame);
+    if (!gameStarted) {  // Prevent adding listeners multiple times
+        document.addEventListener('keydown', startGame);
+        startScreen.addEventListener('touchstart', startGame, { passive: true });
+        startScreen.addEventListener('click', startGame);
+    }
 }
+
 
 // Update the startGame function
 function startGame() {
@@ -183,7 +185,7 @@ function startGame() {
         gameStarted = true;
         startScreen.style.display = 'none';
         canvas.style.display = 'block';
-        controls.style.display = 'flex'; // Show the controls
+        controls.style.display = 'flex';  // Show the controls
         cityDisplay.innerText = `${strings[language].level} 1: ${strings[language].citiesToDiscover}${citiesToDiscover - citiesDiscovered}${strings[language].moreCities}`;
 
         document.addEventListener('keydown', keyPush);
@@ -191,6 +193,7 @@ function startGame() {
         gameInterval = setInterval(game, 100);
     }
 }
+
 
 
 
