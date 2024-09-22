@@ -1,7 +1,7 @@
 // script.js
 
 // Define the base speed for the game (in milliseconds)
-let baseSpeed = 100;  // Start with a delay of 200ms at level 1
+let baseSpeed = 50;  // Start with a delay of 200ms at level 1
 let currentSpeed = baseSpeed;
 let level = 1; // Start with level 1
 
